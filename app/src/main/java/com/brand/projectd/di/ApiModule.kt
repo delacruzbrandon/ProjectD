@@ -1,6 +1,6 @@
 package com.brand.projectd.di
 
-import com.brand.projectd.data.repositories.TrackRepository
+import com.brand.projectd.data.repositories.RetrofitRepository
 import com.brand.projectd.data.service.TrackService
 import com.brand.projectd.util.Constants.BASE_URL
 import dagger.Module
@@ -28,5 +28,5 @@ object ApiModule {
 
     @Singleton
     @Provides
-    fun providesRepository(apiService: TrackService) = TrackRepository(apiService)
+    fun providesRepository(apiService: TrackService) = RetrofitRepository(apiService)
 }

@@ -9,19 +9,18 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import androidx.lifecycle.viewModelScope
 import com.brand.projectd.data.models.ApiResult
 import com.brand.projectd.data.models.Track
-import com.brand.projectd.data.repositories.TrackRepository
+import com.brand.projectd.data.repositories.RetrofitRepository
 import com.brand.projectd.di.ApiModule.provideApiService
 import com.brand.projectd.di.ApiModule.provideRetrofit
 import com.brand.projectd.di.ApiModule.providesRepository
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import java.lang.Exception
 import javax.inject.Inject
 
 @HiltViewModel
 class SharedViewModel @Inject constructor(
-    private val retrofitRepository: TrackRepository
+    private val retrofitRepository: RetrofitRepository
 ): ViewModel() {
 
     private val _apiResult = MutableLiveData<ApiResult>()
