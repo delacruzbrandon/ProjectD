@@ -2,21 +2,16 @@ package com.brand.projectd.ui.screens.list
 
 import android.util.Log
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import coil.compose.rememberImagePainter
@@ -59,12 +54,14 @@ private fun DisplayTrackList(
 private fun TrackItem(
     track: Track
 ) {
-
-    Log.d("TAG", "TrackItem: $track")
     Surface(
         modifier = Modifier
+            .padding(
+                vertical = TRACK_PADDING_MEDIUM,
+                horizontal = TRACK_PADDING_LARGE
+            )
             .fillMaxWidth(),
-        color = MaterialTheme.colors.TrackItemBackgroundColor,
+        color = MaterialTheme.colors.background,
         shape = RoundedCornerShape(IMAGE_ROUND_CORNER),
         elevation = TRACK_ELEVATION,
         onClick = { }
@@ -72,20 +69,27 @@ private fun TrackItem(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
+                .padding(all = TRACK_PADDING_MEDIUM)
                 .wrapContentHeight()
-                .background(MaterialTheme.colors.background)
-                .padding(all = TRACK_PADDING)
         ) {
+
             Image(
                 modifier = Modifier
                     .size(TRACK_SIZE_LARGE)
                     .clip(RoundedCornerShape(IMAGE_ROUND_CORNER)),
-                painter = rememberImagePainter(data = track.image),
+                painter = rememberImagePainter(
+                    data = track.image,
+                    builder = {
+                        crossfade(true)
+                        placeholder(R.drawable.ic_mage)
+                    }
+                ),
                 contentDescription = stringResource(id = R.string.track_image),
             )
+
             Column(
                 modifier = Modifier
-                    .padding(start = TRACK_PADDING)
+                    .padding(start = TRACK_PADDING_LARGE)
                     .height(TRACK_SIZE_LARGE)
             ) {
                 Text(
@@ -107,9 +111,8 @@ private fun TrackItem(
                 Text(
                     modifier = Modifier
                         .wrapContentSize()
-                        .weight(1f)
-                        .align(Alignment.End),
-                    text = track.price,
+                        .weight(1f),
+                    text = "$${track.price}",
                     style = MaterialTheme.typography.subtitle1,
                     color = MaterialTheme.colors.TrackItemPriceColor,
                 )
@@ -122,10 +125,7 @@ private fun TrackItem(
             }
         }
     }
-
-
 }
-
 
 @Composable
 @Preview

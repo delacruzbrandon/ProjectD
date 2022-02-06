@@ -11,7 +11,8 @@ import com.brand.projectd.util.RequestState
 
 @Composable
 fun ListScreen (
-    sharedViewModel: SharedViewModel
+    sharedViewModel: SharedViewModel,
+    navigateTo: (Int) -> Unit
 ) {
     LaunchedEffect(key1 = true) {
         sharedViewModel.getApis()

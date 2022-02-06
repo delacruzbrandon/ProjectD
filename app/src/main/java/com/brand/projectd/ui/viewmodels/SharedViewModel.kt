@@ -29,6 +29,9 @@ class SharedViewModel @Inject constructor(
     private val _trackList = MutableStateFlow<RequestState<List<Track>>>(RequestState.Idle)
     val trackList: StateFlow<RequestState<List<Track>>> = _trackList
 
+    private val _selectedTrack = MutableStateFlow<RequestState<Track>>(RequestState.Idle)
+    val selectedTrack: StateFlow<RequestState<Track>> = _selectedTrack
+
     init {
         providesRepository(
             provideApiService(
@@ -37,22 +40,28 @@ class SharedViewModel @Inject constructor(
         )
     }
 
-    private fun getTracks() {
+    fun getApis() {
+        _trackList.value = RequestState.Loading
+
+        viewModelScope.launch {
+            _apiResult.value = getApiResults()
+            getAllTracks()
+        }
+    }
+
+    fun getSelectedTrack(trackId: Int) {
+        viewModelScope.launch {
+            retrofitRepository.getSelectedTrack(trackId = trackId)
+        }
+    }
+
+    private fun getAllTracks() {
         try {
             viewModelScope.launch {
                 _trackList.value = RequestState.Success(_apiResult.value!!.results)
             }
         } catch (e: Exception) {
             _trackList.value = RequestState.Error(e)
-        }
-    }
-
-    fun getApis() {
-        _trackList.value = RequestState.Loading
-
-        viewModelScope.launch {
-            _apiResult.value = getApiResults()
-            getTracks()
         }
     }
 

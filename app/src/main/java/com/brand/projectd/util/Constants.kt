@@ -11,6 +11,6 @@ object Constants {
     const val TRACK_SCREEN = "trackItem/{trackId}"
 
     const val LIST_ARGUMENT_KEY = "action"
-    const val TASK_ARGUMENT_KEY = "trackId"
+    const val TRACK_ARGUMENT_KEY = "trackId"
 
 }

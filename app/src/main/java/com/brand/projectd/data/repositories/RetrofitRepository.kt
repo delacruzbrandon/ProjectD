@@ -1,6 +1,7 @@
 package com.brand.projectd.data.repositories
 
 import com.brand.projectd.data.models.ApiResult
+import com.brand.projectd.data.models.Track
 import com.brand.projectd.data.service.TrackService
 import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.Dispatchers
@@ -13,5 +14,10 @@ class RetrofitRepository @Inject constructor(private val trackService: TrackServ
     suspend fun getApiResult(): ApiResult =
         withContext(Dispatchers.IO) {
             trackService.getApiResult()
+        }
+
+    suspend fun getSelectedTrack(trackId: Int): Track =
+        withContext(Dispatchers.IO) {
+            trackService.getApiResult().results[trackId]
         }
 }
