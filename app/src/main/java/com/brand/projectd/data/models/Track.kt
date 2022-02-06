@@ -2,11 +2,13 @@ package com.brand.projectd.data.models
 
 import androidx.annotation.Nullable
 import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.brand.projectd.util.Constants.DATABASE_TABLE
 import com.google.gson.annotations.SerializedName
 
 @Entity(tableName = DATABASE_TABLE)
 data class Track(
+    @PrimaryKey
     @SerializedName(value = "trackId", alternate = ["collectionId"])
     @Nullable
     var id: Int,
@@ -15,8 +17,8 @@ data class Track(
     @Nullable
     var name: String,
 
-//     @SerializedName("artworkUrl100")
-//    var image: String,
+    @SerializedName("artworkUrl100")
+    var image: String,
 
     @SerializedName(value = "collectionPrice", alternate= ["trackPrice"])
     @Nullable

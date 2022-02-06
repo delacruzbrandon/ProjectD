@@ -19,6 +19,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import coil.compose.rememberImagePainter
 import com.brand.projectd.R
 import com.brand.projectd.data.models.Track
 import com.brand.projectd.ui.theme.*
@@ -79,7 +80,7 @@ private fun TrackItem(
                 modifier = Modifier
                     .size(TRACK_SIZE_LARGE)
                     .clip(RoundedCornerShape(IMAGE_ROUND_CORNER)),
-                painter = painterResource(id = R.mipmap.test_song),
+                painter = rememberImagePainter(data = track.image),
                 contentDescription = stringResource(id = R.string.track_image),
             )
             Column(
@@ -135,7 +136,7 @@ private fun PreviewTrackItem() {
             "Star Trek Into Darkness",
             "",
             "$12.99",
-//            "Sci-Fi & Fantasy"
+            "Sci-Fi & Fantasy"
 
         )
     )
