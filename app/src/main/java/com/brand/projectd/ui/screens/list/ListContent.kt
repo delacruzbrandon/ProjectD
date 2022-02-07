@@ -8,7 +8,6 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
@@ -22,28 +21,34 @@ import com.brand.projectd.util.RequestState
 
 @Composable
 fun ListContent (
-    trackList: RequestState<List<Track>>
+    trackList: RequestState<List<Track>>,
+    navigateToTrackScreen: (trackId: Int) -> Unit
 ) {
     if (trackList is RequestState.Success) {
         if (trackList.data.isEmpty()) {
-            Log.d("TAG", "ListContent: ${trackList.data}")
         } else {
-            DisplayTrackList(trackList = trackList.data)
-            Log.d("TAG", "ListContent: ${trackList.data}")
+            DisplayTrackList(
+                trackList = trackList.data,
+                navigateToTrackScreen = navigateToTrackScreen
+            )
         }
     }
 }
 
 @Composable
 private fun DisplayTrackList(
-    trackList: List<Track>
+    trackList: List<Track>,
+    navigateToTrackScreen: (trackId: Int) -> Unit
 ) {
     LazyColumn {
         items(
             items = trackList,
             key = { track -> track.id}
         ) { track ->
-            TrackItem(track = track)
+            TrackItem(
+                track = track,
+                navigateToTrackScreen = navigateToTrackScreen
+            )
         }
     }
 
@@ -52,31 +57,34 @@ private fun DisplayTrackList(
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 private fun TrackItem(
-    track: Track
+    track: Track,
+    navigateToTrackScreen: (trackId: Int) -> Unit
 ) {
+
+    Log.d("TAG", "TrackItem: $track")
     Surface(
         modifier = Modifier
             .padding(
-                vertical = TRACK_PADDING_MEDIUM,
-                horizontal = TRACK_PADDING_LARGE
+                vertical = TRACK_ITEM_PADDING_MEDIUM,
+                horizontal = TRACK_ITEM_PADDING_LARGE
             )
             .fillMaxWidth(),
         color = MaterialTheme.colors.background,
-        shape = RoundedCornerShape(IMAGE_ROUND_CORNER),
-        elevation = TRACK_ELEVATION,
-        onClick = { }
+        shape = RoundedCornerShape(TRACK_ITEM_IMAGE_ROUND_CORNER),
+        elevation = TRACK_ITEM_ELEVATION,
+        onClick = { navigateToTrackScreen(track.id) }
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(all = TRACK_PADDING_MEDIUM)
+                .padding(all = TRACK_ITEM_PADDING_MEDIUM)
                 .wrapContentHeight()
         ) {
 
             Image(
                 modifier = Modifier
-                    .size(TRACK_SIZE_LARGE)
-                    .clip(RoundedCornerShape(IMAGE_ROUND_CORNER)),
+                    .size(TRACK_ITEM_SIZE_LARGE)
+                    .clip(RoundedCornerShape(TRACK_ITEM_IMAGE_ROUND_CORNER)),
                 painter = rememberImagePainter(
                     data = track.image,
                     builder = {
@@ -89,8 +97,8 @@ private fun TrackItem(
 
             Column(
                 modifier = Modifier
-                    .padding(start = TRACK_PADDING_LARGE)
-                    .height(TRACK_SIZE_LARGE)
+                    .padding(start = TRACK_ITEM_PADDING_LARGE)
+                    .height(TRACK_ITEM_SIZE_LARGE)
             ) {
                 Text(
                     text = track.name,
@@ -138,6 +146,7 @@ private fun PreviewTrackItem() {
             "$12.99",
             "Sci-Fi & Fantasy"
 
-        )
+        ),
+        navigateToTrackScreen = {}
     )
 }

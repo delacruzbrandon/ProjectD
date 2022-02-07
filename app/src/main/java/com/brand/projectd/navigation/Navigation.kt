@@ -23,9 +23,12 @@ fun SetNavigation(
         startDestination = LIST_SCREEN
     ) {
         listComposable(
-            navigateToTaskScreen = screen.trackItem,
+            trackScreen = screen.trackItem,
             sharedViewModel = sharedViewModel
         )
-        trackComposable()
+        trackComposable(
+            listScreen = screen.trackList,
+            sharedViewModel = sharedViewModel
+        )
     }
 }

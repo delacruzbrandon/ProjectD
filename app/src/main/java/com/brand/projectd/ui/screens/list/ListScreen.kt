@@ -12,15 +12,13 @@ import com.brand.projectd.util.RequestState
 @Composable
 fun ListScreen (
     sharedViewModel: SharedViewModel,
-    navigateTo: (Int) -> Unit
+    taskScreen: (Int) -> Unit
 ) {
     LaunchedEffect(key1 = true) {
         sharedViewModel.getApis()
     }
 
     val allTracks by sharedViewModel.trackList.collectAsState()
-    Log.d("TAG", "ListScreen: $allTracks")
-
 
     Scaffold(
         topBar = {
@@ -28,7 +26,8 @@ fun ListScreen (
         },
         content = {
             ListContent(
-                allTracks
+                allTracks,
+                navigateToTrackScreen = taskScreen
             )
         }
     )

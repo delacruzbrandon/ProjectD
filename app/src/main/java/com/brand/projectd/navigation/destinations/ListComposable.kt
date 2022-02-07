@@ -10,7 +10,7 @@ import com.brand.projectd.util.Constants.LIST_ARGUMENT_KEY
 import com.brand.projectd.util.Constants.LIST_SCREEN
 
 fun NavGraphBuilder.listComposable(
-    navigateToTaskScreen: (Int) -> Unit,
+    trackScreen: (Int) -> Unit,
     sharedViewModel: SharedViewModel
 ) {
     composable(
@@ -20,7 +20,8 @@ fun NavGraphBuilder.listComposable(
         })
     ) {
         ListScreen(
-            sharedViewModel = sharedViewModel
+            sharedViewModel = sharedViewModel,
+            taskScreen = trackScreen
         )
 
     }

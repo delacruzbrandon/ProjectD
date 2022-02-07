@@ -4,14 +4,15 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import com.brand.projectd.data.models.Track
 import com.brand.projectd.ui.screens.track.TrackScreen
+import com.brand.projectd.ui.viewmodels.SharedViewModel
+import com.brand.projectd.util.Action
 import com.brand.projectd.util.Constants.TRACK_ARGUMENT_KEY
 import com.brand.projectd.util.Constants.TRACK_SCREEN
 
 fun NavGraphBuilder.trackComposable(
-    track: Track,
-    listScreen: () -> Unit
+    sharedViewModel: SharedViewModel,
+    listScreen: (Action) -> Unit
 ) {
     composable(
         route = TRACK_SCREEN,
@@ -22,8 +23,8 @@ fun NavGraphBuilder.trackComposable(
         val trackId = backStackEntry.arguments!!.getInt(TRACK_ARGUMENT_KEY)
 
         TrackScreen(
-            trackId = trackId,
-            navigateTo = listScreen
+            sharedViewModel = sharedViewModel,
+            listScreen = listScreen
         )
 
     }
