@@ -29,12 +29,18 @@ class SharedViewModel @Inject constructor(
     private val _selectedTrack = MutableStateFlow<RequestState<Track>>(RequestState.Idle)
     val selectedTrack: StateFlow<RequestState<Track>> = _selectedTrack
 
+    var trackListScrollPosition: Float = 0f
+
     init {
         providesRepository(
             provideApiService(
                 provideRetrofit()
             )
         )
+    }
+
+    fun getTrackListScrollPosition(position: Float) {
+        trackListScrollPosition = position
     }
 
     fun getTrackList() {
@@ -50,26 +56,18 @@ class SharedViewModel @Inject constructor(
         }
     }
 
-    fun getTest() {
+    fun getTest(id: Int) {
+        _selectedTrack.value = RequestState.Loading
+
         viewModelScope.launch {
             _selectedTrack.value = RequestState.Success(
-                getTestResult()
+                getTestResult(id)
             )
         }
     }
 
-//    private fun getSelectedTrack(trackId: Int) { TODO
-//        try {
-//            viewModelScope.launch {
-//                retrofitRepository.getSelectedTrack(trackId = trackId)
-//            }
-//        } catch (e: Exception) {
-//            _selectedTrack.value = RequestState.Error(e)
-//        }
-//    }
-
-    private suspend fun getTestResult(): Track {
-        return retrofitRepository.getTestResult()
+    private suspend fun getTestResult(id: Int): Track {
+        return retrofitRepository.getTestResult(id)
     }
 
     private suspend fun getApiResults(): ApiResult {

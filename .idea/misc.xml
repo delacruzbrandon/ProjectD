@@ -3,7 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/dcbrh/AndroidStudioProjects/ProjectD/app/src/main/res/drawable/ic_error.xml" value="0.1785" />
+        <entry key="..\:/Users/dcbrh/AndroidStudioProjects/ProjectD/app/src/main/res/drawable/ic_hourglass.xml" value="0.1" />
         <entry key="..\:/Users/dcbrh/AndroidStudioProjects/ProjectD/app/src/main/res/drawable/ic_mage.xml" value="0.1785" />
+        <entry key="..\:/Users/dcbrh/AndroidStudioProjects/ProjectD/app/src/main/res/drawable/ic_sad_face.xml" value="0.1785" />
         <entry key="..\:/Users/dcbrh/AndroidStudioProjects/ProjectD/app/src/main/res/drawable/placeholder.xml" value="0.1785" />
       </map>
     </option>

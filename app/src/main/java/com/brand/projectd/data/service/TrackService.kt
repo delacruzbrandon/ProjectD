@@ -10,10 +10,7 @@ import dagger.hilt.EntryPoint
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.flow.Flow
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.GET
-import retrofit2.http.Path
+import retrofit2.http.*
 import javax.inject.Singleton
 
 interface TrackService {
@@ -21,8 +18,8 @@ interface TrackService {
     @GET("search?term=star&amp;country=au&amp;media=movie&amp;all")
     suspend fun getApiResult(): ApiResult
 
-    @GET("lookup?id=1440812215")
-    suspend fun getTestResult(): ApiResult
+    @GET("lookup?id=")
+    suspend fun getTestResult(@Query("id") id: Int): ApiResult
 
     @FormUrlEncoded
     @GET("lookup?id={id}")

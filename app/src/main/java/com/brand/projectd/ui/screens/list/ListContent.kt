@@ -2,12 +2,17 @@ package com.brand.projectd.ui.screens.list
 
 import android.util.Log
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.gestures.scrollBy
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
@@ -16,14 +21,20 @@ import androidx.compose.ui.tooling.preview.Preview
 import coil.compose.rememberImagePainter
 import com.brand.projectd.R
 import com.brand.projectd.data.models.Track
+import com.brand.projectd.ui.screens.components.EmptyContent
+import com.brand.projectd.ui.screens.components.LoadingContent
 import com.brand.projectd.ui.theme.*
 import com.brand.projectd.util.RequestState
+import kotlinx.coroutines.launch
 
 @Composable
 fun ListContent (
     trackList: RequestState<List<Track>>,
     navigateToTrackScreen: (trackId: Int) -> Unit
 ) {
+
+
+
     if (trackList is RequestState.Success) {
         if (trackList.data.isEmpty()) {
         } else {
@@ -32,6 +43,10 @@ fun ListContent (
                 navigateToTrackScreen = navigateToTrackScreen
             )
         }
+    } else if (trackList is RequestState.Loading || trackList is RequestState.Idle){
+        LoadingContent()
+    } else {
+        EmptyContent()
     }
 }
 
@@ -40,7 +55,13 @@ private fun DisplayTrackList(
     trackList: List<Track>,
     navigateToTrackScreen: (trackId: Int) -> Unit
 ) {
-    LazyColumn {
+    val listState = rememberLazyListState()
+    // Remember a CoroutineScope to be able to launch
+
+    LazyColumn(
+        state = listState,
+    ) {
+//        listState.scrollBy(listState.)
         items(
             items = trackList,
             key = { track -> track.id}
@@ -92,7 +113,7 @@ private fun TrackItem(
                         placeholder(R.drawable.ic_mage)
                     }
                 ),
-                contentDescription = stringResource(id = R.string.track_image),
+                contentDescription = stringResource(id = R.string.image_track_thumbnail),
             )
 
             Column(

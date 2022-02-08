@@ -10,19 +10,20 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import coil.compose.rememberImagePainter
 import com.brand.projectd.R
 import com.brand.projectd.data.models.Track
+import com.brand.projectd.ui.screens.components.EmptyContent
+import com.brand.projectd.ui.screens.components.LoadingContent
 import com.brand.projectd.ui.theme.TRACK_DETAILS_PADDING_LARGE
 import com.brand.projectd.ui.theme.TrackItemPriceColor
 import com.brand.projectd.ui.theme.TrackItemTextColor
 import com.brand.projectd.ui.theme.TrackItemTextSubtitleColor
 import com.brand.projectd.util.Action
 import com.brand.projectd.util.RequestState
-import java.lang.Exception
 
 @Composable
 fun TrackContent(
@@ -32,10 +33,14 @@ fun TrackContent(
 
     if (track is RequestState.Success) {
         Log.d("TAG", "${track.data}")
-//        DisplayTrackContent(
-//            track = track.data,
-//            navigateTo = navigateTo
-//        )
+        DisplayTrackContent(
+            track = track.data,
+            navigateTo = navigateTo
+        )
+    } else if (track is RequestState.Loading || track is RequestState.Idle){
+        LoadingContent()
+    } else {
+        EmptyContent()
     }
 
 }
@@ -57,8 +62,8 @@ fun DisplayTrackContent(
             modifier = Modifier
                 .fillMaxWidth()
                 .aspectRatio(1f),
-            painter = painterResource(id = R.mipmap.test_image_large),
-            contentDescription = stringResource(id = R.string.track_image)
+            painter = rememberImagePainter(data = track.image),
+            contentDescription = stringResource(id = R.string.image_track_thumbnail)
         )
 
         Column(

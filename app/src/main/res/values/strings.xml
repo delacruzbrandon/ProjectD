@@ -21,8 +21,14 @@ iaculis pretium eros, malesuada faucibus leo eleifend a. Curabitur congue
 orci in neque euismod a blandit libero vehicula.
     </string>
 
-    <string name="track_image">Track Image</string>
+    <string name="image_track_thumbnail">Track Image</string>
+    <string name="image_empty_icon">No content</string>
+    <string name="image_loading_icon">Loading content</string>
 
     <string name="text_appbar_title">iTunes Api App</string>
+    <string name="text_no_content">No content found.</string>
+    <string name="text_loading_content">Content loading...</string>
+
+
 
 </resources>

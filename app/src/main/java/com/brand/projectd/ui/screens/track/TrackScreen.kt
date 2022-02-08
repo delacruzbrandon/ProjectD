@@ -25,12 +25,12 @@ fun TrackScreen(
          * Find a way if you can use [Flow]
          */
 //        sharedViewModel.getTrack(trackId = trackId)
-        sharedViewModel.getTest()
+        sharedViewModel.getTest(trackId)
     }
 
-    val selectedTrack by sharedViewModel.selectedTrack.collectAsState()
-
     val test by sharedViewModel.selectedTrack.collectAsState()
+    Log.d("TAG", "TrackScreen: $test")
+    Log.d("TAG", "TrackScreen: $trackId")
 
     Scaffold(
         topBar = {
