@@ -1,5 +1,6 @@
 package com.brand.projectd.ui.screens.track
 
+import android.util.Log
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -24,9 +25,12 @@ fun TrackScreen(
          * Find a way if you can use [Flow]
          */
 //        sharedViewModel.getTrack(trackId = trackId)
+        sharedViewModel.getTest()
     }
 
     val selectedTrack by sharedViewModel.selectedTrack.collectAsState()
+
+    val test by sharedViewModel.selectedTrack.collectAsState()
 
     Scaffold(
         topBar = {
@@ -34,15 +38,7 @@ fun TrackScreen(
         },
         content = {
             TrackContent(
-                RequestState.Success(
-                    Track(
-                        0,
-                        "The most awesome title",
-                        "",
-                        "12.99",
-                        "Rock and roll!"
-                    )
-                ),
+                test,
                 navigateTo = listScreen
             )
         }

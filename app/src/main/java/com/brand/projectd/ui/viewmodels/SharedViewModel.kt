@@ -23,9 +23,6 @@ class SharedViewModel @Inject constructor(
     private val retrofitRepository: RetrofitRepository
 ): ViewModel() {
 
-    private val _apiResult = MutableLiveData<ApiResult>()
-    val apiResult: LiveData<ApiResult> = _apiResult
-
     private val _trackList = MutableStateFlow<RequestState<List<Track>>>(RequestState.Idle)
     val trackList: StateFlow<RequestState<List<Track>>> = _trackList
 
@@ -40,28 +37,24 @@ class SharedViewModel @Inject constructor(
         )
     }
 
-    fun getApis() {
+    fun getTrackList() {
         _trackList.value = RequestState.Loading
-
-        viewModelScope.launch {
-            _apiResult.value = getApiResults()
-            getAllTracks()
-        }
-    }
-
-//    fun getTrack(trackId: Int) { TODO
-//        viewModelScope.launch {
-//            retrofitRepository.getSelectedTrack(trackId = trackId)
-//        }
-//    }
-
-    private fun getAllTracks() {
         try {
             viewModelScope.launch {
-                _trackList.value = RequestState.Success(_apiResult.value!!.results)
+                _trackList.value = RequestState.Success(
+                    getApiResults().results
+                )
             }
         } catch (e: Exception) {
             _trackList.value = RequestState.Error(e)
+        }
+    }
+
+    fun getTest() {
+        viewModelScope.launch {
+            _selectedTrack.value = RequestState.Success(
+                getTestResult()
+            )
         }
     }
 
@@ -74,6 +67,10 @@ class SharedViewModel @Inject constructor(
 //            _selectedTrack.value = RequestState.Error(e)
 //        }
 //    }
+
+    private suspend fun getTestResult(): Track {
+        return retrofitRepository.getTestResult()
+    }
 
     private suspend fun getApiResults(): ApiResult {
         return retrofitRepository.getApiResult()

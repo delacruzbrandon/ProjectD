@@ -17,6 +17,11 @@ class RetrofitRepository @Inject constructor(private val trackService: TrackServ
             trackService.getApiResult()
         }
 
+    suspend fun getTestResult(): Track =
+        withContext(Dispatchers.IO) {
+            trackService.getTestResult().results[0]
+        }
+
 //    suspend fun getSelectedTrack(trackId: Int): Track = TODO
 //        withContext(Dispatchers.IO) {
 //            trackService.getApiResult().results[trackId]

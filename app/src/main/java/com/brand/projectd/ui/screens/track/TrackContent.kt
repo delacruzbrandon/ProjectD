@@ -1,5 +1,6 @@
 package com.brand.projectd.ui.screens.track
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -30,10 +31,11 @@ fun TrackContent(
 ) {
 
     if (track is RequestState.Success) {
-        DisplayTrackContent(
-            track = track.data,
-            navigateTo = navigateTo
-        )
+        Log.d("TAG", "${track.data}")
+//        DisplayTrackContent(
+//            track = track.data,
+//            navigateTo = navigateTo
+//        )
     }
 
 }
