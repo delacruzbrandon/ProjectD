@@ -6,6 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import com.brand.projectd.ui.screens.components.TopAppBar
 import com.brand.projectd.ui.viewmodels.SharedViewModel
 import com.brand.projectd.util.RequestState
 
@@ -22,7 +23,7 @@ fun ListScreen (
 
     Scaffold(
         topBar = {
-
+            TopAppBar()
         },
         content = {
             ListContent(

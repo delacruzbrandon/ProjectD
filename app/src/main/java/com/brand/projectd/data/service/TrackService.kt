@@ -16,4 +16,7 @@ interface TrackService {
 
     @GET("search?term=star&amp;country=au&amp;media=movie&amp;all")
     suspend fun getApiResult(): ApiResult
+
+    @GET("search?term=star&amp;country=au&amp;media=movie&amp;all")
+    fun getFlowApiResult(): Flow<ApiResult>
 }

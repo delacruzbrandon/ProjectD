@@ -2,32 +2,41 @@ package com.brand.projectd.ui.screens.track
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
-import coil.compose.rememberImagePainter
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import com.brand.projectd.R
 import com.brand.projectd.data.models.Track
 import com.brand.projectd.ui.theme.TRACK_DETAILS_PADDING_LARGE
+import com.brand.projectd.ui.theme.TrackItemPriceColor
+import com.brand.projectd.ui.theme.TrackItemTextColor
+import com.brand.projectd.ui.theme.TrackItemTextSubtitleColor
 import com.brand.projectd.util.Action
+import com.brand.projectd.util.RequestState
+import java.lang.Exception
 
 @Composable
 fun TrackContent(
-    track: Track,
+    track: RequestState<Track>,
     navigateTo: (Action) -> Unit
 ) {
-    DisplayTrackContent(
-        track = track,
-        navigateTo = navigateTo
-    )
-}
 
+    if (track is RequestState.Success) {
+        DisplayTrackContent(
+            track = track.data,
+            navigateTo = navigateTo
+        )
+    }
+
+}
 
 @Composable
 fun DisplayTrackContent(
@@ -37,12 +46,79 @@ fun DisplayTrackContent(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(all = TRACK_DETAILS_PADDING_LARGE)
             .background(MaterialTheme.colors.background)
+            .verticalScroll(rememberScrollState())
     ) {
+
+        /** Track Details Cover Photo */
         Image(
-            painter = rememberImagePainter(data = track.image),
+            modifier = Modifier
+                .fillMaxWidth()
+                .aspectRatio(1f),
+            painter = painterResource(id = R.mipmap.test_image_large),
             contentDescription = stringResource(id = R.string.track_image)
         )
+
+        Column(
+            modifier = Modifier
+                .padding(all = TRACK_DETAILS_PADDING_LARGE)
+        ) {
+
+            /** Track Details Title */
+            Text(
+                text = track.name,
+                style = MaterialTheme.typography.h5,
+                color = MaterialTheme.colors.TrackItemTextColor,
+            )
+
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+            ) {
+
+                /** Track Details Genre */
+                Text(
+                    modifier = Modifier
+                        .weight(1f),
+                    text = track.genre,
+                    style = MaterialTheme.typography.subtitle1,
+                    color = MaterialTheme.colors.TrackItemTextSubtitleColor,
+
+                    )
+
+                /** Track Details Price */
+                Text(
+                    modifier = Modifier
+                        .weight(1f),
+                    text = track.price,
+                    style = MaterialTheme.typography.subtitle1,
+                    color = MaterialTheme.colors.TrackItemPriceColor,
+                    textAlign = TextAlign.End
+                )
+            }
+
+            /** Track Details Body */
+            Text(
+                modifier = Modifier.padding(top = TRACK_DETAILS_PADDING_LARGE),
+                text = stringResource(id = R.string.lore_ipsum),
+                style = MaterialTheme.typography.body1,
+                color = MaterialTheme.colors.TrackItemTextColor,
+            )
+        }
     }
+}
+
+@Composable
+@Preview
+fun PreviewDisplayTrackContent() {
+    DisplayTrackContent(
+        track = Track(
+            0,
+            "Title",
+            "",
+            "$12.99" ,
+            "Rock and Roll"
+        ),
+        navigateTo = {}
+    )
 }

@@ -30,7 +30,6 @@ data class Track(
 )
 
 /** TODO
- * var artWork: String
  * var description: String
  */
 

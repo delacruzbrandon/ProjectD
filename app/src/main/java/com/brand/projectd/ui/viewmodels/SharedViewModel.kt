@@ -49,11 +49,11 @@ class SharedViewModel @Inject constructor(
         }
     }
 
-    fun getSelectedTrack(trackId: Int) {
-        viewModelScope.launch {
-            retrofitRepository.getSelectedTrack(trackId = trackId)
-        }
-    }
+//    fun getTrack(trackId: Int) { TODO
+//        viewModelScope.launch {
+//            retrofitRepository.getSelectedTrack(trackId = trackId)
+//        }
+//    }
 
     private fun getAllTracks() {
         try {
@@ -64,6 +64,16 @@ class SharedViewModel @Inject constructor(
             _trackList.value = RequestState.Error(e)
         }
     }
+
+//    private fun getSelectedTrack(trackId: Int) { TODO
+//        try {
+//            viewModelScope.launch {
+//                retrofitRepository.getSelectedTrack(trackId = trackId)
+//            }
+//        } catch (e: Exception) {
+//            _selectedTrack.value = RequestState.Error(e)
+//        }
+//    }
 
     private suspend fun getApiResults(): ApiResult {
         return retrofitRepository.getApiResult()

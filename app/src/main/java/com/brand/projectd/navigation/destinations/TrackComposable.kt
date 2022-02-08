@@ -23,6 +23,7 @@ fun NavGraphBuilder.trackComposable(
         val trackId = backStackEntry.arguments!!.getInt(TRACK_ARGUMENT_KEY)
 
         TrackScreen(
+            trackId = trackId,
             sharedViewModel = sharedViewModel,
             listScreen = listScreen
         )
