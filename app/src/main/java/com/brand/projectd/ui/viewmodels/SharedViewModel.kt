@@ -29,6 +29,8 @@ class SharedViewModel @Inject constructor(
     private val _selectedTrack = MutableStateFlow<RequestState<Track>>(RequestState.Idle)
     val selectedTrack: StateFlow<RequestState<Track>> = _selectedTrack
 
+    private val _currentScreen = MutableStateFlow<Boolean>(false)
+
     var trackListScrollPosition: Float = 0f
 
     init {
@@ -56,7 +58,7 @@ class SharedViewModel @Inject constructor(
         }
     }
 
-    fun getTest(id: Int) {
+    fun selectTrack(id: Int) {
         _selectedTrack.value = RequestState.Loading
 
         viewModelScope.launch {

@@ -97,7 +97,7 @@ fun DisplayTrackContent(
                 Text(
                     modifier = Modifier
                         .weight(1f),
-                    text = track.price,
+                    text = "$${track.price}",
                     style = MaterialTheme.typography.subtitle1,
                     color = MaterialTheme.colors.TrackItemPriceColor,
                     textAlign = TextAlign.End

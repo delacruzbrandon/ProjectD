@@ -21,7 +21,12 @@ interface TrackService {
     @GET("lookup?id=")
     suspend fun getTestResult(@Query("id") id: Int): ApiResult
 
+    /** TODO
+     * Test how you can
+     * fetch specific data
+     * with flow state
+     */
     @FormUrlEncoded
     @GET("lookup?id={id}")
-    fun getFlowApiResult(@Path("id") id: Int): Track
+    fun getFlowApiResult(@Path("id") id: Int): Flow<Track>
 }
