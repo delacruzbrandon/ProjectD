@@ -33,10 +33,9 @@ fun ListContent (
     navigateToTrackScreen: (trackId: Int) -> Unit
 ) {
 
-
-
     if (trackList is RequestState.Success) {
         if (trackList.data.isEmpty()) {
+            EmptyContent()
         } else {
             DisplayTrackList(
                 trackList = trackList.data,
@@ -45,8 +44,6 @@ fun ListContent (
         }
     } else if (trackList is RequestState.Loading || trackList is RequestState.Idle){
         LoadingContent()
-    } else {
-        EmptyContent()
     }
 }
 
@@ -55,13 +52,8 @@ private fun DisplayTrackList(
     trackList: List<Track>,
     navigateToTrackScreen: (trackId: Int) -> Unit
 ) {
-    val listState = rememberLazyListState()
-    // Remember a CoroutineScope to be able to launch
 
-    LazyColumn(
-        state = listState,
-    ) {
-//        listState.scrollBy(listState.)
+    LazyColumn {
         items(
             items = trackList,
             key = { track -> track.id}

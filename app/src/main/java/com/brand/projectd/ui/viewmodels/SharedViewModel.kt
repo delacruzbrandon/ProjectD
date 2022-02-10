@@ -1,13 +1,10 @@
 package com.brand.projectd.ui.viewmodels
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.brand.projectd.util.RequestState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import androidx.lifecycle.viewModelScope
-import com.brand.projectd.data.models.ApiResult
 import com.brand.projectd.data.models.Track
 import com.brand.projectd.data.repositories.RetrofitRepository
 import com.brand.projectd.di.ApiModule.provideApiService
@@ -45,12 +42,14 @@ class SharedViewModel @Inject constructor(
         trackListScrollPosition = position
     }
 
-    fun getTrackList() {
-        _trackList.value = RequestState.Loading
+    fun setTrackList() {
+        if (_trackList.value is RequestState.Idle)
+            _trackList.value = RequestState.Loading
+
         try {
             viewModelScope.launch {
                 _trackList.value = RequestState.Success(
-                    getApiResults().results
+                    returnTrackList()
                 )
             }
         } catch (e: Exception) {
@@ -58,21 +57,21 @@ class SharedViewModel @Inject constructor(
         }
     }
 
-    fun selectTrack(id: Int) {
+    fun setSelectedTrack(id: Int) {
         _selectedTrack.value = RequestState.Loading
 
         viewModelScope.launch {
             _selectedTrack.value = RequestState.Success(
-                getTestResult(id)
+                returnSelectedTrack(id)
             )
         }
     }
 
-    private suspend fun getTestResult(id: Int): Track {
-        return retrofitRepository.getTestResult(id)
+    private suspend fun returnSelectedTrack(id: Int): Track {
+        return retrofitRepository.getTrackSelected(id)
     }
 
-    private suspend fun getApiResults(): ApiResult {
-        return retrofitRepository.getApiResult()
+    private suspend fun returnTrackList(): List<Track> {
+        return retrofitRepository.getTrackList()
     }
 }

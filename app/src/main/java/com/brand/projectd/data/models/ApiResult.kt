@@ -1,6 +1,11 @@
 package com.brand.projectd.data.models
 
+import com.google.gson.annotations.SerializedName
+
 data class ApiResult(
-    var resultCount: Int,
-    var results: List<Track>
+    @SerializedName("resultCount")
+    var trackCount: Int,
+
+    @SerializedName("results")
+    var trackList: List<Track>
 )

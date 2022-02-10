@@ -1,5 +1,6 @@
 package com.brand.projectd.ui.screens.list
 
+import android.util.Log
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -14,7 +15,7 @@ fun ListScreen (
     taskScreen: (Int) -> Unit
 ) {
     LaunchedEffect(key1 = true) {
-        sharedViewModel.getTrackList()
+        sharedViewModel.setTrackList()
     }
 
     val allTracks by sharedViewModel.trackList.collectAsState()

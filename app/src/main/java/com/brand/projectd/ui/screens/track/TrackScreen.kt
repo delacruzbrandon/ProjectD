@@ -17,11 +17,9 @@ fun TrackScreen(
 ) {
     LaunchedEffect(key1 = true) {
         /** TODO
-         * Pass ID to track screen
-         * Use ID to query selected track
          * Find a way if you can use [Flow]
          */
-        sharedViewModel.selectTrack(trackId)
+        sharedViewModel.setSelectedTrack(trackId)
     }
 
     val test by sharedViewModel.selectedTrack.collectAsState()

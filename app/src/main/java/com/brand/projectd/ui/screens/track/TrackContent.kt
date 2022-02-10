@@ -30,7 +30,6 @@ fun TrackContent(
     track: RequestState<Track>,
     navigateTo: (Action) -> Unit
 ) {
-
     if (track is RequestState.Success) {
         Log.d("TAG", "${track.data}")
         DisplayTrackContent(
