@@ -17,12 +17,6 @@ fun FavoriteScreen(
             643978126,
             "Star Trek Into Darkness",
             "",
-            "$12.99",
-            "Sci-Fi & Fantasy"
-
-        ),Track(
-            643978126,
-            "Star Trek Into Darkness",
             "",
             "$12.99",
             "Sci-Fi & Fantasy"
@@ -30,6 +24,15 @@ fun FavoriteScreen(
         ),Track(
             643978126,
             "Star Trek Into Darkness",
+            "",
+            "",
+            "$12.99",
+            "Sci-Fi & Fantasy"
+
+        ),Track(
+            643978126,
+            "Star Trek Into Darkness",
+            "",
             "",
             "$12.99",
             "Sci-Fi & Fantasy"

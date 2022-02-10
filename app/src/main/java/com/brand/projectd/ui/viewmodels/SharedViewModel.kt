@@ -10,6 +10,7 @@ import com.brand.projectd.data.repositories.RetrofitRepository
 import com.brand.projectd.di.ApiModule.provideApiService
 import com.brand.projectd.di.ApiModule.provideRetrofit
 import com.brand.projectd.di.ApiModule.providesRepository
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import java.lang.Exception
@@ -59,6 +60,12 @@ class SharedViewModel @Inject constructor(
             _selectedTrack.value = RequestState.Success(
                 returnSelectedTrack(id)
             )
+        }
+    }
+
+    fun addTask() {
+        viewModelScope.launch(Dispatchers.IO) {
+
         }
     }
 

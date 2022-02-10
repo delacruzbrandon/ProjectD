@@ -8,7 +8,7 @@ import com.google.gson.annotations.SerializedName
 
 @Entity(tableName = DATABASE_TABLE)
 data class Track(
-    @PrimaryKey
+    @PrimaryKey (autoGenerate = true)
     @SerializedName(value = "trackId", alternate = ["collectionId"])
     @Nullable
     var id: Int,
@@ -16,6 +16,10 @@ data class Track(
     @SerializedName(value="trackName", alternate= ["collectionName"])
     @Nullable
     var name: String,
+
+    @SerializedName(value="longDescription", alternate= ["shortDescription"])
+    @Nullable
+    var description: String,
 
     @SerializedName("artworkUrl100")
     var image: String,

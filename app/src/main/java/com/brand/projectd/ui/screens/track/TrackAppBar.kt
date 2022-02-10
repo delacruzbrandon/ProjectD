@@ -9,6 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.brand.projectd.ui.theme.TopAppBarContentColor
 import com.brand.projectd.util.Action
+import com.brand.projectd.util.Action.ADD
 import com.brand.projectd.util.Action.NO_ACTION
 
 @Composable
@@ -58,7 +59,11 @@ fun DetailsAppBar(
 fun LikeAction(
     onLikeClicked: (Action) -> Unit
 ) {
-    IconButton(onClick = { /*TODO*/ }) {
+    IconButton(
+        onClick = {
+            onLikeClicked(ADD)
+
+        }) {
         Icon(
             imageVector = Icons.Filled.Favorite,
             contentDescription = "Appbar Like Icon"

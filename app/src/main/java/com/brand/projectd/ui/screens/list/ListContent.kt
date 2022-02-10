@@ -156,8 +156,8 @@ private fun PreviewTrackItem() {
             "Star Trek Into Darkness",
             "",
             "$12.99",
+            "$12.99",
             "Sci-Fi & Fantasy"
-
         ),
         navigateToTrackScreen = {}
     )

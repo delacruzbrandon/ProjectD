@@ -52,6 +52,8 @@ fun DisplayTrackContent(
             .verticalScroll(rememberScrollState())
     ) {
 
+        Log.d("TAG", "DisplayTrackContent: $track")
+
         /** Track Details Cover Photo */
         Image(
             modifier = Modifier
@@ -102,7 +104,7 @@ fun DisplayTrackContent(
             /** Track Details Body */
             Text(
                 modifier = Modifier.padding(top = TRACK_DETAILS_PADDING_LARGE),
-                text = stringResource(id = R.string.lore_ipsum),
+                text = if (track.description.isNullOrBlank()) "No Description." else track.description,
                 style = MaterialTheme.typography.body1,
                 color = MaterialTheme.colors.TrackItemTextColor,
             )
@@ -116,6 +118,7 @@ fun PreviewDisplayTrackContent() {
     DisplayTrackContent(
         track = Track(
             0,
+            "Title",
             "Title",
             "",
             "$12.99" ,
