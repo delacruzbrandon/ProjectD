@@ -27,14 +27,11 @@ import com.brand.projectd.util.RequestState
 
 @Composable
 fun TrackContent(
-    track: RequestState<Track>,
-    navigateTo: (Action) -> Unit
+    track: RequestState<Track>
 ) {
     if (track is RequestState.Success) {
-        Log.d("TAG", "${track.data}")
         DisplayTrackContent(
-            track = track.data,
-            navigateTo = navigateTo
+            track = track.data
         )
     } else if (track is RequestState.Loading || track is RequestState.Idle){
         LoadingContent()
@@ -46,8 +43,7 @@ fun TrackContent(
 
 @Composable
 fun DisplayTrackContent(
-    track: Track,
-    navigateTo: (Action) -> Unit
+    track: Track
 ) {
     Column(
         modifier = Modifier
@@ -124,7 +120,6 @@ fun PreviewDisplayTrackContent() {
             "",
             "$12.99" ,
             "Rock and Roll"
-        ),
-        navigateTo = {}
+        )
     )
 }

@@ -19,12 +19,7 @@ fun SetNavigation(
     sharedViewModel: SharedViewModel
 ) {
 
-
     val navController = rememberNavController()
-    val navBackStackEntry by navController.currentBackStackEntryAsState()
-    val currentDestination = navBackStackEntry?.destination?.route.toString()
-
-    sharedViewModel.passCurrentScreen(currentDestination)
 
     val screen = remember(navController) {
         Screens(navController = navController)

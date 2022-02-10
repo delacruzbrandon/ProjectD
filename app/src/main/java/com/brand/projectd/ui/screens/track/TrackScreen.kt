@@ -32,10 +32,7 @@ fun TrackScreen(
             )
         },
         content = {
-            TrackContent(
-                test,
-                navigateTo = listScreen
-            )
+            TrackContent(test)
         }
     )
 }

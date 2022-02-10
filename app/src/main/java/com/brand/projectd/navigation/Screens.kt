@@ -8,9 +8,7 @@ class Screens(navController: NavHostController) {
 
     /** Go to TrackList composable and kill TrackItem composable */
     val trackList: (Action) -> Unit = { action ->
-        navController.navigate(route = "trackList/$action") {
-            popUpTo(LIST_SCREEN) { inclusive = true }
-        }
+        navController.popBackStack()
     }
 
     /** Only go to TrackItem Composable */

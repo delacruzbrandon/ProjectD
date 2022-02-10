@@ -1,18 +1,15 @@
 package com.brand.projectd.ui.screens.track
 
-import androidx.compose.foundation.clickable
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import com.brand.projectd.R
-import com.brand.projectd.ui.theme.TopAppBarBackgroundColor
 import com.brand.projectd.ui.theme.TopAppBarContentColor
 import com.brand.projectd.util.Action
+import com.brand.projectd.util.Action.NO_ACTION
 
 @Composable
 fun TrackAppBar(
@@ -38,25 +35,23 @@ fun DetailsAppBar(
             )
         },
         navigationIcon =  {
-            Icon(
-                modifier = Modifier.clickable { /*TODO*/ },
-                imageVector = Icons.Filled.ArrowBack,
-                contentDescription = "Appbar Back Icon",
-            )
+            IconButton (
+                onClick = { onBackClicked(NO_ACTION) },
+                modifier = Modifier
+            ) {
+                Icon(
+                    imageVector = Icons.Filled.ArrowBack,
+                    contentDescription = "Back IconButton"
+                )
+            }
         },
         actions = {
-            ActionsTrackAppBar(
-                onLikeClicked = { /*TODO*/ }
+            LikeAction(
+                onLikeClicked = onLikeClicked
             )
+
         }
     )
-}
-
-@Composable
-fun ActionsTrackAppBar(
-    onLikeClicked: (Action) -> Unit
-) {
-    LikeAction(onLikeClicked = onLikeClicked)
 }
 
 @Composable

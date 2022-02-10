@@ -12,5 +12,6 @@ object Constants {
 
     const val LIST_ARGUMENT_KEY = "action"
     const val TRACK_ARGUMENT_KEY = "trackId"
+    const val FAVORITES_ARGUMENT_KEY = "favorites"
 
 }

@@ -25,9 +25,15 @@ orci in neque euismod a blandit libero vehicula.
     <string name="image_empty_icon">No content</string>
     <string name="image_loading_icon">Loading content</string>
 
-    <string name="text_appbar_title">iTunes Api App</string>
+    <string name="text_default_appbar_title">iTunes Api App</string>
+    <string name="text_track_appbar_title">Details</string>
+    <string name="text_favorites_appbar_title">Favorites</string>
+
     <string name="text_no_content">No content found.</string>
     <string name="text_loading_content">Content loading...</string>
+
+    <string name="icon_back_button">Back Button</string>
+
 
 
 

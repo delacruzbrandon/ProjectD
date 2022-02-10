@@ -11,9 +11,9 @@ import com.brand.projectd.util.Constants.TRACK_ARGUMENT_KEY
 import com.brand.projectd.util.Constants.TRACK_SCREEN
 
 fun NavGraphBuilder.trackComposable(
-    sharedViewModel: SharedViewModel,
-    listScreen: (Action) -> Unit
-) {
+    listScreen: (Action) -> Unit,
+    sharedViewModel: SharedViewModel
+    ) {
     composable(
         route = TRACK_SCREEN,
         arguments = listOf(navArgument(TRACK_ARGUMENT_KEY) {

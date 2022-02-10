@@ -1,7 +1,5 @@
 package com.brand.projectd.ui.viewmodels
 
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import com.brand.projectd.util.RequestState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -12,7 +10,6 @@ import com.brand.projectd.data.repositories.RetrofitRepository
 import com.brand.projectd.di.ApiModule.provideApiService
 import com.brand.projectd.di.ApiModule.provideRetrofit
 import com.brand.projectd.di.ApiModule.providesRepository
-import com.brand.projectd.util.Constants.LIST_SCREEN
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import java.lang.Exception
@@ -63,10 +60,6 @@ class SharedViewModel @Inject constructor(
                 returnSelectedTrack(id)
             )
         }
-    }
-
-    fun passCurrentScreen(screen: String) {
-        _currentScreen.value = screen
     }
 
     private suspend fun returnSelectedTrack(id: Int): Track {

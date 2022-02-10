@@ -74,7 +74,6 @@ private fun TrackItem(
     navigateToTrackScreen: (trackId: Int) -> Unit
 ) {
 
-    Log.d("TAG", "TrackItem: $track")
     Surface(
         modifier = Modifier
             .padding(
