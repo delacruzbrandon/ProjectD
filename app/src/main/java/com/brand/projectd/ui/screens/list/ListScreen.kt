@@ -1,12 +1,11 @@
 package com.brand.projectd.ui.screens.list
 
-import android.util.Log
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import com.brand.projectd.ui.screens.components.TopAppBar
+import com.brand.projectd.ui.screens.components.ListAppBar
 import com.brand.projectd.ui.viewmodels.SharedViewModel
 
 @Composable
@@ -20,9 +19,14 @@ fun ListScreen (
 
     val allTracks by sharedViewModel.trackList.collectAsState()
 
+    /** TODO
+     * Pass shareViewModel
+     * to TopAppBar's
+     * and decide from there what to display
+     */
     Scaffold(
         topBar = {
-            TopAppBar()
+            ListAppBar()
         },
         content = {
             ListContent(

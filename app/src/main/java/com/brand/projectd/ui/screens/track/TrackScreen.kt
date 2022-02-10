@@ -5,7 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import com.brand.projectd.ui.screens.components.TopAppBar
+import com.brand.projectd.ui.screens.components.ListAppBar
 import com.brand.projectd.ui.viewmodels.SharedViewModel
 import com.brand.projectd.util.Action
 
@@ -26,7 +26,10 @@ fun TrackScreen(
 
     Scaffold(
         topBar = {
-            TopAppBar()
+            TrackAppBar(
+                onLikeClicked = {},
+                onBackClicked = listScreen
+            )
         },
         content = {
             TrackContent(

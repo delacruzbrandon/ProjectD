@@ -1,41 +1,34 @@
-package com.brand.projectd.ui.screens.components
+package com.brand.projectd.ui.screens.track
 
 import androidx.compose.foundation.clickable
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.brand.projectd.R
-import com.brand.projectd.ui.theme.*
+import com.brand.projectd.ui.theme.TopAppBarBackgroundColor
+import com.brand.projectd.ui.theme.TopAppBarContentColor
 import com.brand.projectd.util.Action
 
 @Composable
-fun TopAppBar() {
-    DefaultAppBar()
-}
-
-@Composable
-fun DefaultAppBar(
+fun TrackAppBar(
+    onLikeClicked: (Action) -> Unit,
+    onBackClicked: (Action) -> Unit
 ) {
-    TopAppBar (
-        title = {
-            Text(
-                text = stringResource(id = R.string.text_appbar_title),
-                color = MaterialTheme.colors.TopAppBarContentColor
-            )
-        },
-        backgroundColor = MaterialTheme.colors.TopAppBarBackgroundColor
+    DetailsAppBar(
+        onLikeClicked = onLikeClicked,
+        onBackClicked = onBackClicked
     )
 }
 
 @Composable
 fun DetailsAppBar(
-    onBackClicked: () -> Unit,
-    onLikeClicked: (Action) -> Unit
+    onLikeClicked: (Action) -> Unit,
+    onBackClicked: (Action) -> Unit
 ) {
     TopAppBar(
         title = {
@@ -46,21 +39,21 @@ fun DetailsAppBar(
         },
         navigationIcon =  {
             Icon(
-                modifier = Modifier.clickable { onBackClicked },
+                modifier = Modifier.clickable { /*TODO*/ },
                 imageVector = Icons.Filled.ArrowBack,
                 contentDescription = "Appbar Back Icon",
             )
         },
         actions = {
-            ActionsListAppBar(
-                onLikeClicked = onLikeClicked
+            ActionsTrackAppBar(
+                onLikeClicked = { /*TODO*/ }
             )
         }
     )
 }
 
 @Composable
-fun ActionsListAppBar(
+fun ActionsTrackAppBar(
     onLikeClicked: (Action) -> Unit
 ) {
     LikeAction(onLikeClicked = onLikeClicked)
@@ -69,10 +62,10 @@ fun ActionsListAppBar(
 @Composable
 fun LikeAction(
     onLikeClicked: (Action) -> Unit
-    ) {
+) {
     IconButton(onClick = { /*TODO*/ }) {
         Icon(
-            imageVector = Icons.Filled.Favorite, 
+            imageVector = Icons.Filled.Favorite,
             contentDescription = "Appbar Like Icon"
         )
     }
@@ -80,16 +73,10 @@ fun LikeAction(
 
 @Composable
 @Preview
-fun PreviewDetailsAppBar() {
+fun PreviewTrackAppBar() {
     DetailsAppBar(
-        onBackClicked = {},
-        onLikeClicked = {}
+        onLikeClicked = {},
+        onBackClicked = {}
     )
-}
-
-@Composable
-@Preview
-fun PreviewDefaultAppBar() {
-    DefaultAppBar()
 }
 

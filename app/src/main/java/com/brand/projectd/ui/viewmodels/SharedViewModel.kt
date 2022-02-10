@@ -1,5 +1,7 @@
 package com.brand.projectd.ui.viewmodels
 
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import com.brand.projectd.util.RequestState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -10,6 +12,7 @@ import com.brand.projectd.data.repositories.RetrofitRepository
 import com.brand.projectd.di.ApiModule.provideApiService
 import com.brand.projectd.di.ApiModule.provideRetrofit
 import com.brand.projectd.di.ApiModule.providesRepository
+import com.brand.projectd.util.Constants.LIST_SCREEN
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import java.lang.Exception
@@ -26,9 +29,8 @@ class SharedViewModel @Inject constructor(
     private val _selectedTrack = MutableStateFlow<RequestState<Track>>(RequestState.Idle)
     val selectedTrack: StateFlow<RequestState<Track>> = _selectedTrack
 
-    private val _currentScreen = MutableStateFlow<Boolean>(false)
-
-    var trackListScrollPosition: Float = 0f
+    private val _currentScreen = MutableStateFlow("")
+    val currentScreen: StateFlow<String> = _currentScreen
 
     init {
         providesRepository(
@@ -36,10 +38,6 @@ class SharedViewModel @Inject constructor(
                 provideRetrofit()
             )
         )
-    }
-
-    fun getTrackListScrollPosition(position: Float) {
-        trackListScrollPosition = position
     }
 
     fun setTrackList() {
@@ -65,6 +63,10 @@ class SharedViewModel @Inject constructor(
                 returnSelectedTrack(id)
             )
         }
+    }
+
+    fun passCurrentScreen(screen: String) {
+        _currentScreen.value = screen
     }
 
     private suspend fun returnSelectedTrack(id: Int): Track {
