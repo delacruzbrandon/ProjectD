@@ -10,6 +10,10 @@ class Screens(navController: NavHostController) {
     val trackList: (Action) -> Unit = { action ->
         navController.popBackStack()
     }
+    /** Only go to TrackItem Composable */
+    val favoritesList: (Action) -> Unit = { action ->
+        navController.navigate(route = "favoritesList/$action")
+    }
 
     /** Only go to TrackItem Composable */
     val trackItem: (Int) -> Unit = { trackId ->

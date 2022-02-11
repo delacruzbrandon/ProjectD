@@ -5,13 +5,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import com.brand.projectd.ui.screens.components.ListAppBar
 import com.brand.projectd.ui.viewmodels.SharedViewModel
+import com.brand.projectd.util.Action
 
 @Composable
 fun ListScreen (
-    sharedViewModel: SharedViewModel,
-    taskScreen: (Int) -> Unit
+    taskScreen: (Int) -> Unit,
+    favoritesScreen: (Action) -> Unit,
+    sharedViewModel: SharedViewModel
 ) {
     LaunchedEffect(key1 = true) {
         sharedViewModel.setTrackList()
@@ -26,12 +27,15 @@ fun ListScreen (
      */
     Scaffold(
         topBar = {
-            ListAppBar()
+            ListAppBar(
+                navigateToFavoritesScreen = favoritesScreen
+
+            )
         },
         content = {
             ListContent(
-                allTracks,
-                navigateToTrackScreen = taskScreen
+                navigateToTrackScreen = taskScreen,
+                trackList = allTracks
             )
         }
     )

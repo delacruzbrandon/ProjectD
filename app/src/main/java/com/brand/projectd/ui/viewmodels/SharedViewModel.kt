@@ -63,11 +63,11 @@ class SharedViewModel @Inject constructor(
         }
     }
 
-    fun addTask() {
-        viewModelScope.launch(Dispatchers.IO) {
-
-        }
-    }
+//    fun addTask() {
+//        viewModelScope.launch(Dispatchers.IO) {
+//
+//        }
+//    }
 
     private suspend fun returnSelectedTrack(id: Int): Track {
         return retrofitRepository.getTrackSelected(id)

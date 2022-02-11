@@ -8,6 +8,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.brand.projectd.navigation.destinations.favoritesComposable
 import com.brand.projectd.navigation.destinations.listComposable
 import com.brand.projectd.navigation.destinations.trackComposable
 import com.brand.projectd.ui.viewmodels.SharedViewModel
@@ -19,7 +20,6 @@ fun SetNavigation(
     sharedViewModel: SharedViewModel
 ) {
 
-    val navController = rememberNavController()
 
     val screen = remember(navController) {
         Screens(navController = navController)
@@ -31,6 +31,12 @@ fun SetNavigation(
     ) {
         listComposable(
             trackScreen = screen.trackItem,
+            favoritesScreen = screen.favoritesList,
+            sharedViewModel = sharedViewModel
+        )
+        favoritesComposable(
+            trackScreen = screen.trackItem,
+            listScreen = screen.trackList,
             sharedViewModel = sharedViewModel
         )
         trackComposable(

@@ -24,13 +24,14 @@ import com.brand.projectd.data.models.Track
 import com.brand.projectd.ui.screens.components.EmptyContent
 import com.brand.projectd.ui.screens.components.LoadingContent
 import com.brand.projectd.ui.theme.*
+import com.brand.projectd.util.Action
 import com.brand.projectd.util.RequestState
 import kotlinx.coroutines.launch
 
 @Composable
 fun ListContent (
-    trackList: RequestState<List<Track>>,
-    navigateToTrackScreen: (trackId: Int) -> Unit
+    navigateToTrackScreen: (trackId: Int) -> Unit,
+    trackList: RequestState<List<Track>>
 ) {
 
     if (trackList is RequestState.Success) {
@@ -49,8 +50,8 @@ fun ListContent (
 
 @Composable
 private fun DisplayTrackList(
-    trackList: List<Track>,
-    navigateToTrackScreen: (trackId: Int) -> Unit
+    navigateToTrackScreen: (trackId: Int) -> Unit,
+    trackList: List<Track>
 ) {
 
     LazyColumn {
@@ -70,8 +71,8 @@ private fun DisplayTrackList(
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 private fun TrackItem(
-    track: Track,
-    navigateToTrackScreen: (trackId: Int) -> Unit
+    navigateToTrackScreen: (trackId: Int) -> Unit,
+    track: Track
 ) {
 
     Surface(

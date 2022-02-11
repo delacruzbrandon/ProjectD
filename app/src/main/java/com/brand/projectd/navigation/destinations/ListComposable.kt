@@ -6,11 +6,13 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.brand.projectd.ui.screens.list.ListScreen
 import com.brand.projectd.ui.viewmodels.SharedViewModel
+import com.brand.projectd.util.Action
 import com.brand.projectd.util.Constants.LIST_ARGUMENT_KEY
 import com.brand.projectd.util.Constants.LIST_SCREEN
 
 fun NavGraphBuilder.listComposable(
     trackScreen: (Int) -> Unit,
+    favoritesScreen: (Action) -> Unit,
     sharedViewModel: SharedViewModel
 ) {
     composable(
@@ -20,8 +22,9 @@ fun NavGraphBuilder.listComposable(
         })
     ) {
         ListScreen(
-            sharedViewModel = sharedViewModel,
-            taskScreen = trackScreen
+            taskScreen = trackScreen,
+            favoritesScreen = favoritesScreen,
+            sharedViewModel = sharedViewModel
         )
 
     }
