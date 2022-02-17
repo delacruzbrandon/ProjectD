@@ -45,6 +45,8 @@ fun ListContent (
         }
     } else if (trackList is RequestState.Loading || trackList is RequestState.Idle){
         LoadingContent()
+    } else {
+        EmptyContent()
     }
 }
 
